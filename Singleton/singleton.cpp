@@ -1,32 +1,27 @@
-#include <iostream>
-
-class singleton {
+class Singleton
+{
 public:
-    static singleton* instance()
-    {
-        if (inst != nullptr)
-        {
-            return inst;
-        }
-        else
-        {
-            inst = new singleton;
-        }
-    }
-    
+	static Singleton* Instance();
+
+protected:
+	Singleton()
+	{}
+
 private:
-    singleton() = default;
-    singleton(singleton& const) = delete;
-    singleton(singleton&& const) = delete;
-    
-private:
-    static singleton* inst;
+	static Singleton* _instance;
 };
 
-singleton* singleton::inst = nullptr;
+Singleton* Singleton::_instance = 0;
+
+Singleton* Singleton::Instance()
+{
+	if (_instance == 0)
+	{
+		_instance = new Singleton;
+	}
+	return _instance;
+}
 
 int main()
 {
-    singleton* a = singleton::instance();
-    singleton* b = singleton::instance();
 }
