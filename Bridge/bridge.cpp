@@ -9,20 +9,24 @@ public:
 class CameraManufacturer :public PhoneImplementation
 {
 public:
-	void Feature() override
-	{
-		std::cout << "Capture Meri";
-	}
+	void Feature() override;
 };
+
+void CameraManufacturer::Feature()
+{
+	std::cout << "Capture Meri";
+}
 
 class WidgetManufacturer :public PhoneImplementation
 {
 public:
-	void Feature() override
-	{
-		std::cout << "Calling to Meri";
-	}
+	void Feature() override;
 };
+
+void WidgetManufacturer::Feature()
+{
+	std::cout << "Calling to Meri";
+}
 
 class Phone
 {
@@ -41,15 +45,19 @@ public:
 	Apple() : Phone(new CameraManufacturer)
 	{}
 
-	void camera() override
-	{
-		PIptr->Feature();
-	}
-	void call() override
-	{
-		PIptr->Feature();
-	}
+	void camera() override;
+	void call() override;
 };
+
+void Apple::camera() 
+{
+	PIptr->Feature();
+}
+
+void Apple::call() 
+{
+	PIptr->Feature();
+}
 
 class Nokia :public Phone
 {
@@ -60,6 +68,10 @@ public:
 	}
 };
 
+void Nokia::call()
+{
+	PIptr->Feature();
+}
 
 int main()
 {
