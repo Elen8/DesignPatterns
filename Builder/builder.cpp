@@ -25,13 +25,15 @@ public:
 	Design* colour;
 	Mode* fch;
 
-	void specification()
-	{
-		std::cout << "AI exists: " << ai->exist << std::endl;
-		std::cout << "Colour: " << colour->colour << std::endl;
-		std::cout << "For children: " << fch->for_children << std::endl;
-	}
+	void specification();
 };
+
+void Robot::specification()
+{
+	std::cout << "AI exists: " << ai->exist << std::endl;
+	std::cout << "Colour: " << colour->colour << std::endl;
+	std::cout << "For children: " << fch->for_children << std::endl;
+}
 
 class Builder {
 public:
@@ -43,82 +45,101 @@ public:
 class RobinTheRobot :public Builder
 {
 public:
-	AI* if_exists() {
-		AI* ai = new AI();
-		ai->exist = true;
-		return ai;
-	}
-	Design* select_colour() {
-		Design* design = new Design();
-		design->colour = 101;
-		return design;
-	}
-	Mode* child_mode() {
-		Mode* mode = new Mode();
-		mode->for_children = true;
-		return mode;
-	}
+	AI* if_exists();
+	Design* select_colour();
+	Mode* child_mode();
 };
+
+
+AI* RobinTheRobot::if_exists() {
+	AI* ai = new AI();
+	ai->exist = true;
+	return ai;
+}
+
+Design* RobinTheRobot::select_colour() {
+	Design* design = new Design();
+	design->colour = 101;
+	return design;
+}
+
+Mode* RobinTheRobot::child_mode() {
+	Mode* mode = new Mode();
+	mode->for_children = true;
+	return mode;
+}
 
 class ToyRobot :public Builder
 {
 public:
-	AI* if_exists() {
-		AI* ai = new AI();
-		ai->exist = false;
-		return ai;
-	}
-	Design* select_colour() {
-		Design* design = new Design();
-		design->colour = 144;
-		return design;
-	}
-	Mode* child_mode() {
-		Mode* mode = new Mode();
-		mode->for_children = true;
-		return mode;
-	}
+	AI* if_exists();
+	Design* select_colour();
+	Mode* child_mode();
 };
+
+AI* ToyRobot::if_exists() {
+	AI* ai = new AI();
+	ai->exist = false;
+	return ai;
+}
+
+Design* ToyRobot::select_colour() {
+	Design* design = new Design();
+	design->colour = 144;
+	return design;
+}
+
+Mode* ToyRobot::child_mode() {
+	Mode* mode = new Mode();
+	mode->for_children = true;
+	return mode;
+}
 
 class ServantRobot :public Builder
 {
 public:
-	AI* if_exists() {
-		AI* ai = new AI();
-		ai->exist = false;
-		return ai;
-	}
-	Design* select_colour() {
-		Design* design = new Design();
-		design->colour = 100;
-		return design;
-	}
-	Mode* child_mode() {
-		Mode* mode = new Mode();
-		mode->for_children = false;
-		return mode;
-	}
+	AI* if_exists();
+	Design* select_colour();
+	Mode* child_mode();
 };
+
+AI* ServantRobot::if_exists() {
+	AI* ai = new AI();
+	ai->exist = false;
+	return ai;
+}
+
+Design* ServantRobot::select_colour() {
+	Design* design = new Design();
+	design->colour = 100;
+	return design;
+}
+
+Mode* ServantRobot::child_mode() {
+	Mode* mode = new Mode();
+	mode->for_children = false;
+	return mode;
+}
 
 class Director {
 	Builder* builder;
 public:
-	void setBuilder(Builder* newBuilder) {
-		builder = newBuilder;
-	}
+	void setBuilder(Builder* newBuilder);
 
-	Robot* create() {
-		Robot* robot = new Robot();
-
-		robot->ai = builder->if_exists();
-
-		robot->colour = builder->select_colour();
-
-		robot->fch = builder->child_mode();
-
-		return robot;
-	}
+	Robot* create();
 };
+
+void Director::setBuilder(Builder* newBuilder) {
+	builder = newBuilder;
+}
+
+Robot* Director::create() {
+	Robot* robot = new Robot();
+	robot->ai = builder->if_exists();
+	robot->colour = builder->select_colour();
+	robot->fch = builder->child_mode();
+	return robot;
+}
 
 int main() {
 	Robot* rob;
