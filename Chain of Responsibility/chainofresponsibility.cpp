@@ -46,7 +46,7 @@ public:
 
 private:
     void processImplementation(Computer&) {
-        std::cout << "Scaling photo\n";
+        std::cout << "Turning on\n";
     }
 
     TCPU mTCPU;
