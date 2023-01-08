@@ -59,9 +59,3 @@ void Customer::get_bank_details()
 	std::cout << "Card Holder Name: " << BankDetails->get_holder() << std::endl;
 	std::cout << "Credit Card: " << BankDetails->get_number() << std::endl;
 }
-
-int main()
-{
-	Customer c;
-	c.get_bank_details();
-}
